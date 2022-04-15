@@ -2,6 +2,7 @@ package com.kunal.actmobile.di
 
 import android.content.Context
 import com.kunal.actmobile.BaseApplication
+import com.kunal.actmobile.data.datastore.DatastoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,4 +20,9 @@ object AppModule {
         return context as BaseApplication
     }
 
+    @Singleton
+    @Provides
+    fun provideDatastoreManager(@ApplicationContext context: Context): DatastoreManager {
+        return DatastoreManager(context)
+    }
 }

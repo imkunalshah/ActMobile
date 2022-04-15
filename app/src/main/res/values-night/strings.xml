@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ActMobile</string>
     <string name="country_name">Country Name</string>
     <string name="your_region">Your Region</string>
 </resources>

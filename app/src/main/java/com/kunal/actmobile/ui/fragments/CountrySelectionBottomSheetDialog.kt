@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.deishelon.roundedbottomsheet.RoundedBottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kunal.actmobile.databinding.DialogCategorySelectionBinding
 import com.kunal.actmobile.ui.viewmodels.MainViewModel
+import timber.log.Timber
 
-class CountrySelectionBottomSheetDialog : BottomSheetDialogFragment() {
+class CountrySelectionBottomSheetDialog : RoundedBottomSheetDialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -30,7 +32,7 @@ class CountrySelectionBottomSheetDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         view = DialogCategorySelectionBinding.inflate(inflater, container, false)
-        view.lifecycleOwner = this
+        view.lifecycleOwner = viewLifecycleOwner
         return view.root
     }
 
@@ -47,9 +49,9 @@ class CountrySelectionBottomSheetDialog : BottomSheetDialogFragment() {
     private fun initializeObservers() {
         viewModel.countryList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
-                Log.d("countryList", "Not Empty")
+                Timber.tag("countryList").d(it.toString())
             } else {
-                Log.d("countryList", "Empty")
+                Timber.tag("countryList").d("Empty")
             }
         }
     }
