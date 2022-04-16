@@ -1,8 +1,10 @@
 package com.kunal.actmobile.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.asLiveData
 import com.kunal.actmobile.R
 import com.kunal.actmobile.data.datastore.DatastoreManager
 import com.kunal.actmobile.databinding.ActivityMainBinding
@@ -22,20 +24,38 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var view: ActivityMainBinding
 
+    companion object {
+        const val BASE_IMAGE_URL = "https://countryflagsapi.com/png/"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState)
         view = ActivityMainBinding.inflate(layoutInflater)
         setContentView(view.root)
         view.lifecycleOwner = this
         getData()
         initializeViews()
+        initializeObservers()
+    }
+
+    private fun initializeObservers() {
+        datastoreManager.countryName.asLiveData().observe(this) { countryName ->
+            if (countryName.isNullOrBlank()) {
+                view.countryName.text = resources.getString(R.string.country_name)
+                return@observe
+            }
+            view.countryName.text = countryName
+        }
+        datastoreManager.countryCode.asLiveData().observe(this) { countryCode ->
+            countryCode?.let { it -> view.countryFlag.loadImage("$BASE_IMAGE_URL${it}") }
+        }
     }
 
     private fun initializeViews() {
-        view.countryFlag.loadImage("https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1350px-Flag_of_India.svg.png")
         view.selectedCountry.setOnClickListener {
             val countrySelectionBottomSheetDialog = CountrySelectionBottomSheetDialog.newInstance()
-            countrySelectionBottomSheetDialog.show(supportFragmentManager,TAG)
+            countrySelectionBottomSheetDialog.show(supportFragmentManager, TAG)
         }
     }
 

@@ -16,7 +16,7 @@ class DatastoreManager(
     companion object {
         private const val COUNTRY_STORE_NAME = "country_data_store"
         private val COUNTRY_NAME = stringPreferencesKey("country_name")
-        private val COUNTRY_FLAG = stringPreferencesKey("country_flag")
+        private val COUNTRY_CODE = stringPreferencesKey("country_code")
     }
 
     private val Context.countryDataStore: DataStore<Preferences> by preferencesDataStore(name = COUNTRY_STORE_NAME)
@@ -26,20 +26,20 @@ class DatastoreManager(
             preferences[COUNTRY_NAME]
         }
 
-    suspend fun saveCountryName(token: String) {
+    suspend fun saveCountryName(countryName: String) {
         context.countryDataStore.edit { preferences ->
-            preferences[COUNTRY_NAME] = token
+            preferences[COUNTRY_NAME] = countryName
         }
     }
 
-    val countryFlag: Flow<String?>
+    val countryCode: Flow<String?>
         get() = context.countryDataStore.data.map { preferences ->
-            preferences[COUNTRY_FLAG]
+            preferences[COUNTRY_CODE]
         }
 
-    suspend fun saveCountryFlag(token: String) {
+    suspend fun saveCountryCode(countryCode: String) {
         context.countryDataStore.edit { preferences ->
-            preferences[COUNTRY_FLAG] = token
+            preferences[COUNTRY_CODE] = countryCode
         }
     }
 }

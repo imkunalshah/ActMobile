@@ -5,5 +5,5 @@ import com.bumptech.glide.Glide
 
 
 fun ImageView.loadImage(imageUrl: String) {
-    Glide.with(this.context).load(imageUrl).into(this)
+    Glide.with(this.context).load(imageUrl).timeout(30000).into(this)
 }

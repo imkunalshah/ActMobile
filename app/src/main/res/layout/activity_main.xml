@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:fontFamily="monospace"
+            android:fontFamily="sans-serif"
             android:text="@string/your_region"
             android:textAllCaps="true"
             android:textColor="@color/black"
@@ -52,12 +52,13 @@
                     android:scaleType="fitXY" />
 
                 <TextView
+                    android:id="@+id/countryName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="16dp"
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="monospace"
+                    android:fontFamily="sans-serif"
                     android:gravity="center_vertical"
                     android:text="@string/country_name"
                     android:textAlignment="gravity"

@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/circle_background.xml" value="0.111" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.111" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2832046508789063" />
-        <entry key="app/src/main/res/layout/dialog_category_selection.xml" value="0.32447916666666665" />
+        <entry key="app/src/main/res/layout/dialog_category_selection.xml" value="0.22692667643229164" />
+        <entry key="app/src/main/res/layout/layout_country_card.xml" value="0.22052917480468753" />
       </map>
     </option>
   </component>

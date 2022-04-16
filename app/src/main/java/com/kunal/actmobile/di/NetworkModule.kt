@@ -3,7 +3,6 @@ package com.kunal.actmobile.di
 import android.content.Context
 import com.kunal.actmobile.data.network.NetworkConnectionInterceptor
 import com.kunal.actmobile.data.network.apis.CountryApi
-import com.kunal.actmobile.data.network.apis.ImageApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,23 +21,6 @@ object NetworkModule {
     @Provides
     fun provideNetworkConnectionInterceptor(@ApplicationContext context: Context): NetworkConnectionInterceptor {
         return NetworkConnectionInterceptor(context)
-    }
-
-    @Singleton
-    @Provides
-    fun provideImageApiService(
-        interceptor: NetworkConnectionInterceptor
-    ): ImageApi {
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl("https://my-json-server.typicode.com/easygautam/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ImageApi::class.java)
     }
 
     @Singleton
